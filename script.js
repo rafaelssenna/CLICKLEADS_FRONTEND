@@ -77,11 +77,13 @@ function renderRow(phone){
   td.textContent = phone;
   tr.appendChild(td);
   resultsBody.appendChild(tr);
+  // mostra o botão assim que houver itens
+  maybeShowCSV();
 }
 
 function maybeShowCSV(){
-  const can = coletados.length > 0 && (doneSeen || waCount >= alvo);
-  btnDownload.style.display = can ? "inline-block" : "none";
+  // habilita exportar assim que houver qualquer resultado (mesmo sem atingir a meta)
+  btnDownload.style.display = coletados.length > 0 ? "inline-block" : "none";
 }
 
 function updateProgress(city=""){
@@ -101,7 +103,9 @@ function csvDownload(){
   const blob = new Blob([header + body], { type: "text/csv;charset=utf-8" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = "leads.csv";
+  const nicho  = (document.getElementById("nicho")?.value || "").trim().replace(/\s+/g,"_");
+  const cidade = (document.getElementById("local")?.value || "").trim().split(",")[0].replace(/\s+/g,"_");
+  a.download = `leads_${nicho}_${cidade}_${coletados.length}.csv`;
   document.body.appendChild(a);
   a.click();
   a.remove();
