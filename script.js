@@ -9,7 +9,9 @@ let waCount = 0;
 let nonWaCount = 0;
 let searched = 0;
 let doneSeen = false;
+// `vistos` controla apenas números de telefone para evitar duplicados
 const vistos = new Set();
+// `coletados` armazena objetos { phone, name } para exportação de CSV
 const coletados = [];
 
 // watchdog para SSE silencioso
@@ -29,6 +31,10 @@ const exhaustedWarning = document.getElementById("exhaustedWarning");
 const resultsBody = document.getElementById("resultsBody");
 
 // ===== Util =====
+// Retorna apenas a primeira cidade antes de vírgula para fins de exibição.
+// A busca utiliza o valor completo digitado pelo usuário (que pode conter
+// múltiplas cidades separadas por |, ; ou quebras de linha).  Use esta
+// função apenas para títulos ou nomes de arquivos.
 function onlyOneCity(t){ return (t||"").split(",")[0].trim(); }
 
 function bumpIdle(){
@@ -68,14 +74,25 @@ function resetUI(){
   resultsSec.style.display = "block";
 }
 
-function renderRow(phone){
-  if(vistos.has(phone)) return;
+/**
+ * Renderiza uma linha na tabela de resultados.  Aceita telefone e
+ * opcionalmente o nome do estabelecimento.  Evita duplicar números já
+ * mostrados e armazena os dados completos para exportação.
+ *
+ * @param {string} phone O número de telefone E.164 ou no formato retornado pelo backend
+ * @param {string | undefined | null} name O nome do estabelecimento (pode ser vazio)
+ */
+function renderRow(phone, name){
+  if(!phone || vistos.has(phone)) return;
   vistos.add(phone);
-  coletados.push(phone);
+  coletados.push({ phone: String(phone).trim(), name: name ? String(name).trim() : "" });
   const tr = document.createElement("tr");
-  const td = document.createElement("td");
-  td.textContent = phone;
-  tr.appendChild(td);
+  const tdName = document.createElement("td");
+  const tdPhone = document.createElement("td");
+  tdName.textContent = name ? String(name).trim() : "";
+  tdPhone.textContent = phone;
+  tr.appendChild(tdName);
+  tr.appendChild(tdPhone);
   resultsBody.appendChild(tr);
   // mostra o botão assim que houver itens
   maybeShowCSV();
@@ -98,13 +115,18 @@ function updateProgress(city=""){
 
 // ===== CSV =====
 function csvDownload(){
-  const header = "phone\n";
-  const body = coletados.map(p => String(p).trim()).join("\n");
+  // Gera CSV com cabeçalhos name,phone.  Usa coletados que contém objetos.
+  const header = "name,phone\n";
+  const body = coletados.map(({ name, phone }) => {
+    const n = (name || "").replace(/,|\n/g, " ").trim();
+    const p = String(phone).trim();
+    return `${n},${p}`;
+  }).join("\n");
   const blob = new Blob([header + body], { type: "text/csv;charset=utf-8" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
   const nicho  = (document.getElementById("nicho")?.value || "").trim().replace(/\s+/g,"_");
-  const cidade = (document.getElementById("local")?.value || "").trim().split(",")[0].replace(/\s+/g,"_");
+  const cidade = onlyOneCity(document.getElementById("local")?.value || "").replace(/\s+/g,"_");
   a.download = `leads_${nicho}_${cidade}_${coletados.length}.csv`;
   document.body.appendChild(a);
   a.click();
@@ -122,7 +144,7 @@ async function fallbackFetch(nicho, local, n, somenteWA){
   let r = await fetch(url(somenteWA ? 1 : 0));
   if(!r.ok) throw new Error(`HTTP ${r.status}`);
   let data = await r.json();
-  let rows = (data.items || data.leads || []).map(x => x.phone);
+  let rows = (data.items || data.leads || []);
 
   // Se “Somente WhatsApp” e veio vazio, tenta sem filtro para não ficar travado
   if(somenteWA && rows.length === 0){
@@ -130,12 +152,14 @@ async function fallbackFetch(nicho, local, n, somenteWA){
       r = await fetch(url(0));
       if(r.ok){
         data = await r.json();
-        rows = (data.items || data.leads || []).map(x => x.phone);
+        rows = (data.items || data.leads || []);
       }
     }catch{}
   }
 
-  rows.forEach(p => renderRow(p));
+  rows.forEach(({ phone, name }) => {
+    renderRow(phone, name);
+  });
   waCount = coletados.length;
   doneSeen = true;
   updateProgress(local);
@@ -163,7 +187,7 @@ function startStream(nicho, local, n, somenteWA){
     es.addEventListener("item", (e) => {
       const d = JSON.parse(e.data||"{}");
       if(d.phone){
-        renderRow(d.phone);
+        renderRow(d.phone, d.name);
         if(d.has_whatsapp) waCount++;
         updateProgress(local);
         bumpIdle();
@@ -212,7 +236,8 @@ form.addEventListener("submit", (ev) => {
   ev.preventDefault();
   const nicho = document.getElementById("nicho").value.trim();
   const localRaw = document.getElementById("local").value.trim();
-  const local = onlyOneCity(localRaw);
+  // Não reduzimos a múltiplas cidades: passamos o valor completo para o backend.  A função onlyOneCity é usada apenas em filenames
+  const local = localRaw;
   document.getElementById("local").value = local;
   const n = Math.max(1, Math.min(500, parseInt(document.getElementById("quantidade").value || "1", 10)));
   const somenteWA = document.getElementById("somenteWhatsapp").checked;
