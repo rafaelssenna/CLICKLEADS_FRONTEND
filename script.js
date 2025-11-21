@@ -119,7 +119,7 @@ socket.on('extraction-error', (data) => {
   document.getElementById('progressBar').style.display = 'none';
 });
 
-// Adiciona lead na tabela
+// Adiciona lead na tabela EM TEMPO REAL
 function addLeadToTable(lead) {
   const tbody = document.getElementById('resultsBody');
 
@@ -129,7 +129,6 @@ function addLeadToTable(lead) {
     <td>${lead.index}</td>
     <td>${escapeHtml(lead.nome)}</td>
     <td>${escapeHtml(lead.telefone)}</td>
-    <td>${escapeHtml(lead.endereco)}</td>
   `;
 
   tbody.appendChild(row);
@@ -138,6 +137,9 @@ function addLeadToTable(lead) {
   setTimeout(() => {
     row.classList.remove('new-row');
   }, 1000);
+
+  // Auto-scroll para o último item
+  row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 // Atualiza contador
@@ -167,10 +169,10 @@ function exportToCSV() {
     return;
   }
 
-  let csv = 'Número,Nome,Telefone,Endereço\n';
+  let csv = 'Número,Nome,Telefone\n';
 
   currentLeads.forEach((lead, index) => {
-    csv += `${index + 1},"${lead.nome}","${lead.telefone}","${lead.endereco}"\n`;
+    csv += `${index + 1},"${lead.nome}","${lead.telefone}"\n`;
   });
 
   const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -198,10 +200,10 @@ function copyToClipboard() {
     return;
   }
 
-  let text = 'Nome\tTelefone\tEndereço\n';
+  let text = 'Nome\tTelefone\n';
 
   currentLeads.forEach(lead => {
-    text += `${lead.nome}\t${lead.telefone}\t${lead.endereco}\n`;
+    text += `${lead.nome}\t${lead.telefone}\n`;
   });
 
   navigator.clipboard.writeText(text).then(() => {
