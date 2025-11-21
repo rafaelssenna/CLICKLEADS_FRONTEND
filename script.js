@@ -1,7 +1,7 @@
 // Conecta ao servidor via WebSocket
 // Para desenvolvimento local, use: const socket = io();
 // Para produção, configure a URL do backend:
-const BACKEND_URL = window.BACKEND_URL || 'http://web-production-e49bb.up.railway.app';
+const BACKEND_URL = window.BACKEND_URL || 'https://web-production-e49bb.up.railway.app';
 const socket = io(BACKEND_URL);
 
 let currentLeads = [];
