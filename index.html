@@ -3,24 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smart Leads - Extrator de Contatos</title>
+  <title>Smart Leads - Helsen IA | Extração Inteligente de Contatos</title>
+  <meta name="description" content="Plataforma de extração automática de leads do Google Maps em tempo real. Tecnologia Helsen IA.">
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
 </head>
 <body>
+  <div class="background-gradient"></div>
+
   <div class="container">
     <header>
-      <div class="logo-container">
-        <img src="logohelsenia.png" alt="Helsen" class="logo logo-helsen">
-        <div class="header-text">
-          <h1><img src="logosmartleads.png" alt="Smart Leads" class="logo-smartleads"></h1>
-          <p>Extrator automático de contatos do Google Maps - TEMPO REAL</p>
+      <div class="header-top">
+        <img src="logohelsenia.png" alt="Helsen IA" class="logo-helsen">
+        <div class="header-badge">
+          <span class="badge-dot"></span>
+          <span class="badge-text">Sistema Online</span>
+        </div>
+      </div>
+
+      <div class="hero-section">
+        <img src="logosmartleads.png" alt="Smart Leads" class="logo-smartleads">
+        <h1 class="hero-title">Extração Inteligente de Leads</h1>
+        <p class="hero-subtitle">Encontre clientes qualificados do Google Maps em tempo real com tecnologia de IA</p>
+
+        <div class="features-badges">
+          <div class="feature-badge">
+            <span class="feature-icon">⚡</span>
+            <span>Tempo Real</span>
+          </div>
+          <div class="feature-badge">
+            <span class="feature-icon">🎯</span>
+            <span>100% Qualificado</span>
+          </div>
+          <div class="feature-badge">
+            <span class="feature-icon">🤖</span>
+            <span>IA Avançada</span>
+          </div>
         </div>
       </div>
     </header>
 
     <main>
       <div class="form-card">
+        <div class="form-header">
+          <h2>Configure sua Busca</h2>
+          <p>Preencha os dados abaixo para iniciar a extração de leads</p>
+        </div>
+
         <form id="extractForm">
           <div class="form-group">
             <label for="nicho">
@@ -123,7 +152,16 @@
     </main>
 
     <footer>
-      <p>Desenvolvido para extrair leads em tempo real</p>
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="logohelsenia.png" alt="Helsen IA" class="footer-logo">
+          <p class="footer-tagline">Inteligência Artificial para Resultados Reais</p>
+        </div>
+        <div class="footer-info">
+          <p class="footer-copyright">© 2024 Helsen IA. Todos os direitos reservados.</p>
+          <p class="footer-tech">Powered by Smart Leads Technology</p>
+        </div>
+      </div>
     </footer>
   </div>
 
