@@ -1,5 +1,8 @@
 // Conecta ao servidor via WebSocket
-const socket = io();
+// Para desenvolvimento local, use: const socket = io();
+// Para produção, configure a URL do backend:
+const BACKEND_URL = window.BACKEND_URL || 'http://localhost:3000';
+const socket = io(BACKEND_URL);
 
 let currentLeads = [];
 let isExtracting = false;
