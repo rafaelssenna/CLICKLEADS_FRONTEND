@@ -63,65 +63,44 @@ body {
   z-index: 1;
 }
 
-/* ========== HEADER ========== */
-header {
-  text-align: center;
-  margin-bottom: 60px;
-  padding: 40px 0;
+/* ========== TOP BAR ========== */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(90deg, #0a0a0a 0%, #000000 100%);
+  border-bottom: 2px solid var(--gold-primary);
+  box-shadow: 0 4px 20px rgba(251, 191, 36, 0.2);
+  z-index: 1000;
+  padding: 15px 0;
 }
 
-.header-top {
+.top-bar-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 50px;
-  padding: 0 20px;
 }
 
 .logo-helsen {
-  height: 50px;
-  filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.3));
+  height: 45px;
+  filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.4));
   transition: all 0.3s ease;
 }
 
 .logo-helsen:hover {
   transform: scale(1.05);
-  filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.5));
+  filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.6));
 }
 
-.header-badge {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  background: rgba(251, 191, 36, 0.1);
-  border: 1px solid rgba(251, 191, 36, 0.2);
-  border-radius: 20px;
-}
-
-.badge-dot {
-  width: 8px;
-  height: 8px;
-  background: var(--gold-primary);
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.7;
-    transform: scale(1.2);
-  }
-}
-
-.badge-text {
-  color: var(--gold-primary);
-  font-size: 0.85rem;
-  font-weight: 600;
+/* ========== HEADER ========== */
+header {
+  text-align: center;
+  margin-top: 80px;
+  margin-bottom: 60px;
+  padding: 60px 0 40px;
 }
 
 .hero-section {
@@ -130,8 +109,8 @@ header {
 }
 
 .logo-smartleads {
-  height: 120px;
-  max-width: 500px;
+  height: 160px;
+  max-width: 600px;
   margin-bottom: 30px;
   filter: drop-shadow(0 0 15px rgba(251, 191, 36, 0.4));
   transition: all 0.4s ease;
@@ -187,15 +166,16 @@ header {
   transition: all 0.3s ease;
 }
 
+.feature-badge i {
+  font-size: 1.3rem;
+  color: var(--gold-primary);
+}
+
 .feature-badge:hover {
   background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(251, 191, 36, 0.1) 100%);
   border-color: rgba(251, 191, 36, 0.4);
   transform: translateY(-2px);
   box-shadow: var(--glow-gold);
-}
-
-.feature-icon {
-  font-size: 1.3rem;
 }
 
 /* ========== FORM CARD ========== */
@@ -255,15 +235,16 @@ header {
 .form-group label {
   display: flex;
   align-items: center;
+  gap: 10px;
   font-weight: 600;
   margin-bottom: 10px;
   color: var(--text-primary);
   font-size: 1rem;
 }
 
-.label-icon {
-  margin-right: 10px;
-  font-size: 1.3rem;
+.form-group label i {
+  font-size: 1.2rem;
+  color: var(--gold-primary);
 }
 
 .form-group input {
@@ -530,6 +511,13 @@ header {
 .results-header h2 {
   font-size: 2rem;
   color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.results-header h2 i {
+  color: var(--gold-primary);
 }
 
 .results-actions {
@@ -630,31 +618,7 @@ footer {
 .footer-content {
   max-width: 1200px;
   margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 30px;
-}
-
-.footer-brand {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.footer-logo {
-  height: 40px;
-  filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.3));
-}
-
-.footer-tagline {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-}
-
-.footer-info {
-  text-align: right;
+  text-align: center;
 }
 
 .footer-copyright {
@@ -675,13 +639,17 @@ footer {
     padding: 15px;
   }
 
-  .header-top {
-    flex-direction: column;
-    gap: 20px;
+  .top-bar-content {
+    padding: 0 20px;
   }
 
   .logo-helsen {
-    height: 45px;
+    height: 35px;
+  }
+
+  header {
+    margin-top: 70px;
+    padding: 40px 0 30px;
   }
 
   .hero-title {
@@ -693,7 +661,7 @@ footer {
   }
 
   .logo-smartleads {
-    height: 90px;
+    height: 110px;
   }
 
   .features-badges {
@@ -703,6 +671,10 @@ footer {
   .feature-badge {
     padding: 10px 18px;
     font-size: 0.9rem;
+  }
+
+  .feature-badge i {
+    font-size: 1.1rem;
   }
 
   .form-card {
@@ -722,6 +694,10 @@ footer {
     align-items: flex-start;
   }
 
+  .results-header h2 {
+    font-size: 1.5rem;
+  }
+
   .results-actions {
     width: 100%;
     justify-content: space-between;
@@ -734,14 +710,5 @@ footer {
   #resultsTable th,
   #resultsTable td {
     padding: 12px 14px;
-  }
-
-  .footer-content {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .footer-info {
-    text-align: center;
   }
 }

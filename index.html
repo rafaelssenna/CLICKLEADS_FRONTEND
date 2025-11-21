@@ -6,21 +6,21 @@
   <title>Smart Leads - Helsen IA | Extração Inteligente de Contatos</title>
   <meta name="description" content="Plataforma de extração automática de leads do Google Maps em tempo real. Tecnologia Helsen IA.">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
 </head>
 <body>
   <div class="background-gradient"></div>
 
+  <!-- Barra Superior Helsen IA -->
+  <div class="top-bar">
+    <div class="top-bar-content">
+      <img src="logohelsenia.png" alt="Helsen IA" class="logo-helsen">
+    </div>
+  </div>
+
   <div class="container">
     <header>
-      <div class="header-top">
-        <img src="logohelsenia.png" alt="Helsen IA" class="logo-helsen">
-        <div class="header-badge">
-          <span class="badge-dot"></span>
-          <span class="badge-text">Sistema Online</span>
-        </div>
-      </div>
-
       <div class="hero-section">
         <img src="logosmartleads.png" alt="Smart Leads" class="logo-smartleads">
         <h1 class="hero-title">Extração Inteligente de Leads</h1>
@@ -28,15 +28,15 @@
 
         <div class="features-badges">
           <div class="feature-badge">
-            <span class="feature-icon">⚡</span>
+            <i class="fas fa-bolt"></i>
             <span>Tempo Real</span>
           </div>
           <div class="feature-badge">
-            <span class="feature-icon">🎯</span>
+            <i class="fas fa-bullseye"></i>
             <span>100% Qualificado</span>
           </div>
           <div class="feature-badge">
-            <span class="feature-icon">🤖</span>
+            <i class="fas fa-brain"></i>
             <span>IA Avançada</span>
           </div>
         </div>
@@ -53,7 +53,7 @@
         <form id="extractForm">
           <div class="form-group">
             <label for="nicho">
-              <span class="label-icon">🏢</span>
+              <i class="fas fa-building"></i>
               Nicho / Tipo de Negócio
             </label>
             <input
@@ -67,7 +67,7 @@
 
           <div class="form-group">
             <label for="regiao">
-              <span class="label-icon">📍</span>
+              <i class="fas fa-map-marker-alt"></i>
               Região / Cidade
             </label>
             <input
@@ -81,7 +81,7 @@
 
           <div class="form-group">
             <label for="quantidade">
-              <span class="label-icon">🔢</span>
+              <i class="fas fa-hashtag"></i>
               Quantidade de Contatos
             </label>
             <input
@@ -123,14 +123,14 @@
       <!-- Resultado -->
       <div id="resultsSection" class="results-section" style="display: none;">
         <div class="results-header">
-          <h2>📋 Contatos Extraídos</h2>
+          <h2><i class="fas fa-list"></i> Contatos Extraídos</h2>
           <div class="results-actions">
             <span id="totalResults" class="results-count">0 contatos</span>
             <button onclick="exportToCSV()" class="btn-secondary">
-              📥 Exportar CSV
+              <i class="fas fa-download"></i> Exportar CSV
             </button>
             <button onclick="copyToClipboard()" class="btn-secondary">
-              📋 Copiar Tudo
+              <i class="fas fa-copy"></i> Copiar Tudo
             </button>
           </div>
         </div>
@@ -153,14 +153,8 @@
 
     <footer>
       <div class="footer-content">
-        <div class="footer-brand">
-          <img src="logohelsenia.png" alt="Helsen IA" class="footer-logo">
-          <p class="footer-tagline">Inteligência Artificial para Resultados Reais</p>
-        </div>
-        <div class="footer-info">
-          <p class="footer-copyright">© 2024 Helsen IA. Todos os direitos reservados.</p>
-          <p class="footer-tech">Powered by Smart Leads Technology</p>
-        </div>
+        <p class="footer-copyright">© 2024 Helsen IA. Todos os direitos reservados.</p>
+        <p class="footer-tech">Powered by Smart Leads Technology</p>
       </div>
     </footer>
   </div>
