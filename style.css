@@ -11,8 +11,8 @@
   --bg-card: #111111;
   --bg-input: #0a0a0a;
 
-  --primary-color: #8b5cf6;
-  --primary-hover: #7c3aed;
+  --primary-color: #fbbf24;
+  --primary-hover: #f59e0b;
   --secondary-color: #10b981;
   --danger-color: #ef4444;
   --warning-color: #f59e0b;
@@ -26,7 +26,7 @@
 
   --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
   --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.6), 0 10px 10px -5px rgb(0 0 0 / 0.5);
-  --glow: 0 0 20px rgba(139, 92, 246, 0.3);
+  --glow: 0 0 20px rgba(251, 191, 36, 0.3);
 }
 
 body {
@@ -63,17 +63,17 @@ header {
   height: 80px;
   object-fit: contain;
   transition: all 0.4s ease;
-  filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.3));
+  filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.3));
 }
 
 .logo-helsen {
   height: 90px;
-  filter: brightness(1.2) drop-shadow(0 0 15px rgba(139, 92, 246, 0.4));
+  filter: brightness(1.2) drop-shadow(0 0 15px rgba(251, 191, 36, 0.4));
 }
 
 .logo:hover {
   transform: scale(1.1) translateY(-5px);
-  filter: brightness(1.4) drop-shadow(0 0 25px rgba(139, 92, 246, 0.6));
+  filter: brightness(1.4) drop-shadow(0 0 25px rgba(251, 191, 36, 0.7));
 }
 
 .header-text {
@@ -114,7 +114,7 @@ header p {
 
 .form-card:hover {
   border-color: var(--border-hover);
-  box-shadow: var(--shadow-lg), 0 0 30px rgba(139, 92, 246, 0.4);
+  box-shadow: var(--shadow-lg), 0 0 30px rgba(251, 191, 36, 0.4);
 }
 
 .form-group {
@@ -200,7 +200,7 @@ header p {
 
 .btn-primary:hover:not(:disabled) {
   transform: translateY(-3px);
-  box-shadow: 0 15px 30px rgba(139, 92, 246, 0.5), var(--glow);
+  box-shadow: 0 15px 30px rgba(251, 191, 36, 0.6), var(--glow);
 }
 
 .btn-primary:disabled {
@@ -364,7 +364,7 @@ header p {
 
 .results-section:hover {
   border-color: var(--border-hover);
-  box-shadow: var(--shadow-lg), 0 0 35px rgba(139, 92, 246, 0.4);
+  box-shadow: var(--shadow-lg), 0 0 35px rgba(251, 191, 36, 0.4);
 }
 
 @keyframes fadeIn {
@@ -395,8 +395,8 @@ header p {
 
 .results-count {
   padding: 8px 16px;
-  background: rgba(99, 102, 241, 0.15);
-  border: 1px solid rgba(99, 102, 241, 0.3);
+  background: rgba(251, 191, 36, 0.15);
+  border: 1px solid rgba(251, 191, 36, 0.3);
   color: var(--primary-color);
   border-radius: 6px;
   font-weight: 700;
@@ -443,7 +443,7 @@ header p {
 }
 
 #resultsTable tbody tr:hover {
-  background: rgba(99, 102, 241, 0.05);
+  background: rgba(251, 191, 36, 0.05);
 }
 
 #resultsTable tbody tr.new-row {
